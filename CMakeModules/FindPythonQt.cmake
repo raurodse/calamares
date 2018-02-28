@@ -1,6 +1,7 @@
 # Find PythonQt
 #
-# Sets PYTHONQT_FOUND, PYTHONQT_INCLUDE_DIR, PYTHONQT_LIBRARY, PYTHONQT_LIBRARIES
+# Sets PythonQt_FOUND, PythonQt_All_FOUND to indicate what is installed.
+# Also sets PYTHONQT_INCLUDE_DIR, PYTHONQT_LIBRARY, PYTHONQT_LIBRARIES
 #
 
 # Python is required
@@ -128,18 +129,23 @@ if(UNIX AND NOT APPLE)
   mark_as_advanced(PYTHONQT_LIBUTIL)
 endif()
 
-# All upper case _FOUND variable is maintained for backwards compatibility.
-set(PYTHONQT_FOUND 0)
 set(PythonQt_FOUND 0)
+set(PythonQt_All_FOUND 0)
 
-if(PYTHONQT_INCLUDE_DIR AND PYTHONQT_LIBRARY AND PYTHONQT_QTALL_LIBRARY)
+if(PYTHONQT_INCLUDE_DIR AND PYTHONQT_LIBRARY)
   # Currently CMake'ified PythonQt only supports building against a python Release build.
   # This applies independently of CTK build type (Release, Debug, ...)
   add_definitions(-DPYTHONQT_USE_RELEASE_PYTHON_FALLBACK)
-  set(PYTHONQT_FOUND 1)
-  set(PythonQt_FOUND ${PYTHONQT_FOUND})
-  set(PYTHONQT_LIBRARIES ${PYTHONQT_LIBRARY} ${PYTHONQT_LIBUTIL} ${PYTHONQT_QTALL_LIBRARY})
-elseif(NOT PythonQt_FIND_QUIETLY)
+  set(PythonQt_FOUND 1)
+  set(PYTHONQT_LIBRARIES ${PYTHONQT_LIBRARY} ${PYTHONQT_LIBUTIL})
+endif()
+
+if(PythonQt_FOUND AND PYTHONQT_QTALL_LIBRARY)
+  set(PYTHONQT_LIBRARIES ${PYTHONQT_LIBRARIES} ${PYTHONQT_QTALL_LIBRARY})
+  set(PythonQt_All_FOUND 1)
+endif()
+
+if(NOT PythonQt_FOUND AND NOT PythonQt_FIND_QUIETLY)
   set(_missing "")
   if (NOT PYTHONQT_INCLUDE_DIR)
     list(APPEND _missing "includes")
@@ -151,4 +157,8 @@ elseif(NOT PythonQt_FIND_QUIETLY)
     list(APPEND _missing "qtall")
   endif()
   message(STATUS "PythonQt not found, missing components ${_missing}")
+endif()
+
+if(PythonQt_FOUND AND NOT PythonQt_All_FOUND AND NOT PythonQt_FIND_QUIETLY)
+  message(STATUS "PythonQt found, but missing PythonQt_All")
 endif()
