@@ -41,29 +41,35 @@ set( calamaresui_UI
     utils/DebugWindow.ui
 )
 
-if( WITH_PYTHON )
-    list( APPEND calamaresui_SOURCES
-        modulesystem/PythonJobModule.cpp
-    )
-endif()
 
-if( WITH_PYTHONQT )
-    include_directories(${PYTHON_INCLUDE_DIRS})
-    include_directories(${PYTHONQT_INCLUDE_DIR})
+# Handle preferred Python embedding mechanism:
+#  - PythonQt_All can run everything
+#  - Boost::Python can run job modules
+#  - PythonQt can run job modules
+set( _pythonqt_SRCS
+    utils/PythonQtUtils.cpp
+    viewpages/PythonQtJob.cpp
+    viewpages/PythonQtGlobalStorageWrapper.cpp
+    viewpages/PythonQtUtilsWrapper.cpp
+)
+set( _pythonqt_all_SRCS
+    modulesystem/PythonQtViewModule.cpp
+    viewpages/PythonQtViewStep.cpp
+)
+set( _boost_python_SRCS
+    modulesystem/PythonJobModule.cpp
+)
 
-    list( APPEND calamaresui_SOURCES
-        modulesystem/PythonQtViewModule.cpp
-        utils/PythonQtUtils.cpp
-        viewpages/PythonQtJob.cpp
-        viewpages/PythonQtViewStep.cpp
-        viewpages/PythonQtGlobalStorageWrapper.cpp
-        viewpages/PythonQtUtilsWrapper.cpp
-    )
-    set( OPTIONAL_PRIVATE_LIBRARIES
-        ${OPTIONAL_PRIVATE_LIBRARIES}
-        ${PYTHON_LIBRARIES}
-        ${PYTHONQT_LIBRARIES}
-    )
+if ( WITH_PYTHONQT_VIEW )
+    include_directories( ${PYTHON_INCLUDE_DIRS} ${PYTHONQT_INCLUDE_DIR} )
+    list( APPEND calamaresui_SOURCES ${_pythonqt_all_SRCS} ${_pythonqt_SRCS} )
+    list( APPEND OPTIONAL_PRIVATE_LIBRARIES ${PYTHON_LIBRARIES} ${PYTHONQT_LIBRARIES} )
+elseif( WITH_PYTHON )
+    list( APPEND calamaresui_SOURCES ${_boost_python_SRCS} )
+elseif( WITH_PYTHONQT )
+    include_directories( ${PYTHON_INCLUDE_DIRS} ${PYTHONQT_INCLUDE_DIR} )
+    list( APPEND calamaresui_SOURCES ${_pythonqt_SRCS} )
+    list( APPEND OPTIONAL_PRIVATE_LIBRARIES ${PYTHON_LIBRARIES} ${PYTHONQT_LIBRARIES} )
 endif()
 
 calamares_add_library( calamaresui

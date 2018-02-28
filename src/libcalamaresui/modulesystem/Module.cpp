@@ -28,11 +28,11 @@
 #include "Settings.h"
 #include "CalamaresConfig.h"
 
-#ifdef WITH_PYTHON
+#if defined( WITH_PYTHON ) || defined( WITH_PYTHONQT )
 #include "PythonJobModule.h"
 #endif
 
-#ifdef WITH_PYTHONQT
+#if defined( WITH_PYTHONQT_VIEW )
 #include "PythonQtViewModule.h"
 #endif
 
@@ -84,10 +84,10 @@ Module::fromDescriptor( const QVariantMap& moduleDescriptor,
         }
         else if ( intfString == "pythonqt" )
         {
-#ifdef WITH_PYTHONQT
+#ifdef WITH_PYTHONQT_VIEW
             m = new PythonQtViewModule();
 #else
-            cLog() << "PythonQt modules are not supported in this version of Calamares.";
+            cLog() << "PythonQt view modules are not supported in this version of Calamares.";
 #endif
         }
         else
@@ -105,11 +105,8 @@ Module::fromDescriptor( const QVariantMap& moduleDescriptor,
         }
         else if ( intfString == "python" )
         {
-#ifdef WITH_PYTHON
+#if defined( WITH_PYTHON )
             m = new PythonJobModule();
-#elif defined(WITH_PYTHONQT)
-            m = new PythonQtViewModule();
-#else
             cLog() << "Python modules are not supported in this version of Calamares.";
 #endif
         }

@@ -26,7 +26,7 @@
 #include "modulesystem/ModuleManager.h"
 #include "modulesystem/Module.h"
 
-#ifdef WITH_PYTHONQT
+#ifdef WITH_PYTHONQT_VIEW
 #include <gui/PythonQtScriptingConsole.h>
 #include "ViewManager.h"
 #include "viewpages/PythonQtViewStep.h"
@@ -81,7 +81,7 @@ DebugWindow::DebugWindow()
     QJsonModel* moduleConfigModel = new QJsonModel( this );
     moduleConfigView->setModel( moduleConfigModel );
 
-#ifdef WITH_PYTHONQT
+#ifdef WITH_PYTHONQT_VIEW
     QPushButton* pythonConsoleButton = new QPushButton;
     pythonConsoleButton->setText( "Attach Python console" );
     modulesVerticalLayout->insertWidget( 1, pythonConsoleButton );
@@ -151,7 +151,7 @@ DebugWindow::DebugWindow()
 
     connect( modulesListView->selectionModel(), &QItemSelectionModel::selectionChanged,
              this, [ this, moduleConfigModel
-#ifdef WITH_PYTHONQT
+#ifdef WITH_PYTHONQT_VIEW
              , pythonConsoleButton
 #endif
              ]
@@ -164,7 +164,7 @@ DebugWindow::DebugWindow()
             moduleConfigView->expandAll();
             moduleTypeLabel->setText( module->typeString() );
             moduleInterfaceLabel->setText( module->interfaceString() );
-#ifdef WITH_PYTHONQT
+#ifdef WITH_PYTHONQT_VIEW
             pythonConsoleButton->setVisible(
                         module->interface() == Module::PythonQtInterface &&
                         module->type() == Module::View );
