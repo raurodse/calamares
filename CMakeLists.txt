@@ -190,6 +190,13 @@ if( NOT PYTHONLIBS_FOUND OR NOT PythonQt_All_FOUND )
     set( WITH_PYTHONQT_VIEW OFF )
 endif()
 
+# Prefer only one Python embedding
+if ( WITH_PYTHONQT_VIEW )
+    set( WITH_PYTHON OFF )  # Do Python via PythonQt
+elseif ( WITH_PYTHON )
+    set( WITH_PYTHONQT OFF )  # Do Python via Boost
+endif()
+
 ###
 ### Calamares application info
 ###
