@@ -107,6 +107,7 @@ Module::fromDescriptor( const QVariantMap& moduleDescriptor,
         {
 #if defined( WITH_PYTHON )
             m = new PythonJobModule();
+#else
             cLog() << "Python modules are not supported in this version of Calamares.";
 #endif
         }
