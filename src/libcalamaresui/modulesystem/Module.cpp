@@ -72,7 +72,7 @@ Module::fromDescriptor( const QVariantMap& moduleDescriptor,
     if ( typeString.isEmpty() ||
          intfString.isEmpty() )
     {
-        cLog() << Q_FUNC_INFO << "bad module descriptor format"
+        cError() << "Bad module descriptor format"
                << instanceId;
         return nullptr;
     }
@@ -87,11 +87,11 @@ Module::fromDescriptor( const QVariantMap& moduleDescriptor,
 #ifdef WITH_PYTHONQT_VIEW
             m = new PythonQtViewModule();
 #else
-            cLog() << "PythonQt view modules are not supported in this version of Calamares.";
+            cError() << "PythonQt view modules are not supported in this version of Calamares.";
 #endif
         }
         else
-            cLog() << "Bad interface" << intfString << "for module type" << typeString;
+            cError() << "Bad interface" << intfString << "for module type" << typeString;
     }
     else if ( typeString == "job" )
     {
@@ -108,18 +108,18 @@ Module::fromDescriptor( const QVariantMap& moduleDescriptor,
 #if defined( WITH_PYTHON )
             m = new PythonJobModule();
 #else
-            cLog() << "Python modules are not supported in this version of Calamares.";
+            cError() << "Python modules are not supported in this version of Calamares.";
 #endif
         }
         else
-            cLog() << "Bad interface" << intfString << "for module type" << typeString;
+            cError() << "Bad interface" << intfString << "for module type" << typeString;
     }
     else
-        cLog() << "Bad module type" << typeString;
+        cError() << "Bad module type" << typeString;
 
     if ( !m )
     {
-        cLog() << "Bad module type (" << typeString
+        cDebug() << "Bad module type (" << typeString
             << ") or interface string (" << intfString
             << ") for module " << instanceId;
         return nullptr;
@@ -130,8 +130,8 @@ Module::fromDescriptor( const QVariantMap& moduleDescriptor,
         m->m_directory = moduleDir.absolutePath();
     else
     {
-        cLog() << Q_FUNC_INFO << "bad module directory"
-               << instanceId;
+        cError() << "Bad module directory" << moduleDirectory
+            << "for" << instanceId;
         delete m;
         return nullptr;
     }
