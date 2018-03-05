@@ -19,6 +19,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with Calamares. If not, see <http://www.gnu.org/licenses/>.
 
+import libcalamares
 import platform
 
 from PythonQt.QtGui import *
@@ -152,7 +153,7 @@ class DummyPythonQtViewStep:
         # developer to add here all the needed code to load the module's
         # translation catalog for the new language (which is separate from the
         # main Calamares strings catalog) and reapply any user-visible strings.
-        calamares.utils.debug("PythonQt retranslation event "
+        libcalamares.utils.debug("PythonQt retranslation event "
                               "for locale name: {}".format(locale_name))
 
         # First we load the catalog file for the new language...
@@ -163,7 +164,7 @@ class DummyPythonQtViewStep:
                                      languages=[locale_name])
             _ = _t.gettext
         except OSError as e:
-            calamares.utils.debug(e)
+            libcalamares.utils.debug(e)
             pass
 
         # ... and then we can call setText(_("foo")) and similar methods on
@@ -193,5 +194,5 @@ class DummyPQJob:
         # As an example, we touch a file in the target root filesystem.
         rmp = calamares.global_storage['rootMountPoint']
         os.system("touch {}/calamares_dpqt_was_here".format(rmp))
-        calamares.utils.debug("the dummy job says {}".format(self.my_msg))
+        libcalamares.utils.debug("the dummy job says {}".format(self.my_msg))
         return {'ok': True}

@@ -105,7 +105,9 @@ Module::fromDescriptor( const QVariantMap& moduleDescriptor,
         }
         else if ( intfString == "python" )
         {
-#if defined( WITH_PYTHON )
+#if defined( WITH_PYTHONQT )
+            m = new PythonQtViewModule();
+#elif defined( WITH_PYTHON )
             m = new PythonJobModule();
 #else
             cError() << "Python modules are not supported in this version of Calamares.";

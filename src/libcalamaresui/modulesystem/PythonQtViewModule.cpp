@@ -81,6 +81,8 @@ PythonQtViewModule::loadSelf()
             PythonQt::self()->registerClass( &::GlobalStorage::staticMetaObject,
                                              "calamares" );
 
+            PythonQtObjectPtr libcalamares = PythonQt::self()->createModuleFromScript( "libcalamares" );
+
             // Get a PythonQtObjectPtr to the PythonQt.calamares submodule
             PythonQtObjectPtr pqtm = PythonQt::priv()->pythonQtModule();
             PythonQtObjectPtr cala = PythonQt::self()->lookupObject( pqtm, "calamares" );
@@ -93,7 +95,7 @@ PythonQtViewModule::loadSelf()
             // Prepare Utils object, in module PythonQt.calamares
             if ( !s_utils )
                 s_utils = new ::Utils( Calamares::JobQueue::instance()->globalStorage() );
-            cala.addObject( "utils", s_utils );
+            libcalamares.addObject( "utils", s_utils );
 
             // Basic stdout/stderr handling
             QObject::connect( PythonQt::self(), &PythonQt::pythonStdOut, s_utils, &::Utils::debug );
