@@ -37,6 +37,8 @@ public:
 
 public slots:
     void debug( const QString& s ) const;
+    void warning( const QString& s ) const;
+    void error( const QString& s ) const;
 
     int mount( const QString& device_path,
                const QString& mount_point,

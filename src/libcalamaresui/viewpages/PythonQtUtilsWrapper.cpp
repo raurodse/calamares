@@ -36,7 +36,21 @@ Utils::Utils(QObject* parent)
 void
 Utils::debug(const QString& s) const
 {
-    cDebug() << "PythonQt DBG>" << s;
+    cDebug() << "[PythonQt]" << s;
+}
+
+
+void
+Utils::warning(const QString& s) const
+{
+    cWarning() << "[PythonQt]" << s;
+}
+
+
+void
+Utils::error(const QString& s) const
+{
+    cError() << "[PythonQt]" << s;
 }
 
 

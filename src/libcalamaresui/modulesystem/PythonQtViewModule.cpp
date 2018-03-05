@@ -96,23 +96,14 @@ PythonQtViewModule::loadSelf()
             cala.addObject( "utils", s_utils );
 
             // Basic stdout/stderr handling
-            QObject::connect( PythonQt::self(), &PythonQt::pythonStdOut,
-                     []( const QString& message )
-            {
-                cDebug() << "PythonQt OUT>" << message;
-            } );
-            QObject::connect( PythonQt::self(), &PythonQt::pythonStdErr,
-                     []( const QString& message )
-            {
-                cDebug() << "PythonQt ERR>" << message;
-            } );
-
+            QObject::connect( PythonQt::self(), &PythonQt::pythonStdOut, s_utils, &::Utils::debug );
+            QObject::connect( PythonQt::self(), &PythonQt::pythonStdErr, s_utils, &::Utils::error );
         }
 
         QDir workingDir( m_workingPath );
         if ( !workingDir.exists() )
         {
-            cDebug() << "Invalid working directory"
+            cError() << "Invalid working directory"
                      << m_workingPath
                      << "for module"
                      << name();
@@ -123,7 +114,7 @@ PythonQtViewModule::loadSelf()
         QFileInfo scriptFileInfo( fullPath );
         if ( !scriptFileInfo.isReadable() )
         {
-            cDebug() << "Invalid main script file path"
+            cError() << "Invalid main script file path"
                      << fullPath
                      << "for module"
                      << name();
@@ -136,7 +127,7 @@ PythonQtViewModule::loadSelf()
                 createModuleFromScript( name() );
         if ( cxt.isNull() )
         {
-            cDebug() << "Cannot load PythonQt context from file"
+            cError() << "Cannot load PythonQt context from file"
                      << fullPath
                      << "for module"
                      << name();
@@ -158,9 +149,7 @@ PythonQtViewModule::loadSelf()
 
         m_viewStep = new PythonQtViewStep( cxt );
 
-        cDebug() << "PythonQtViewModule loading self for instance" << instanceKey()
-                 << "\nPythonQtViewModule at address" << this
-                 << "\nViewStep at address" << m_viewStep;
+        cDebug() << "PythonQtViewModule loading self for instance" << instanceKey();
 
         m_viewStep->setModuleInstanceKey( instanceKey() );
         m_viewStep->setConfigurationMap( m_configurationMap );
