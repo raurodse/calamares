@@ -29,7 +29,9 @@
 #include "Settings.h"
 #include "Job.h"
 #include "JobQueue.h"
+#include "ViewManager.h"
 
+#include <QApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QCoreApplication>
@@ -51,7 +53,6 @@ handle_args( QCoreApplication& a )
 {
     QCommandLineOption debugLevelOption( QStringLiteral("D"),
                                           "Verbose output for debugging purposes (0-8).", "level" );
-
     QCommandLineParser parser;
     parser.setApplicationDescription( "Calamares module tester" );
     parser.addHelpOption();
@@ -150,6 +151,7 @@ int
 main( int argc, char* argv[] )
 {
     QCoreApplication a( argc, argv );
+    QApplication* aw = nullptr;
 
     ModuleConfig module = handle_args( a );
     if ( module.moduleName().isEmpty() )
@@ -164,6 +166,13 @@ main( int argc, char* argv[] )
     {
         cError() << "Could not load module" << module.moduleName();
         return 1;
+    }
+
+    cDebug() << " .. got" << m->name() << m->type() << m->interface();
+    if ( m->type() == Calamares::Module::View )
+    {
+        aw = new QApplication( argc, argv );
+        (void) Calamares::ViewManager::instance( nullptr );
     }
 
     if ( !m->isLoaded() )
@@ -187,6 +196,9 @@ main( int argc, char* argv[] )
             cDebug() << count << ".. failed" << r;
         ++count;
     }
+
+    if ( aw )
+        delete aw;
 
     return 0;
 }
