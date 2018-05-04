@@ -52,7 +52,8 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     using CalamaresUtils::windowPreferredWidth;
 
     QSize availableSize = qApp->desktop()->availableGeometry( this ).size();
-
+    this->setObjectName("main");
+    
     cDebug() << "Available size" << availableSize;
 
     if ( ( availableSize.width() < windowPreferredWidth ) || ( availableSize.height() < windowPreferredHeight ) )
@@ -69,7 +70,6 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     resize( w, h );
 
     QBoxLayout* mainLayout = new QHBoxLayout;
-    mainLayout->setObjectName("mainLayout");
     setLayout( mainLayout );
 
     QWidget* sideBox = new QWidget( this );
@@ -77,7 +77,6 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     mainLayout->addWidget( sideBox );
 
     QBoxLayout* sideLayout = new QVBoxLayout;
-    sideLayout->setObjectName("sidebarLayout");
     sideBox->setLayout( sideLayout );
     // Set this attribute into qss file
     //sideBox->setFixedWidth( qBound( 100, CalamaresUtils::defaultFontHeight() * 12, w < windowPreferredWidth ? 100 : 190 ) );
