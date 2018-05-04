@@ -69,22 +69,22 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     resize( w, h );
 
     QBoxLayout* mainLayout = new QHBoxLayout;
-    sideLayout.setObjectName("mainLayout");
+    sideLayout->setObjectName("mainLayout");
     setLayout( mainLayout );
 
     QWidget* sideBox = new QWidget( this );
-    sideLayout.setObjectName("sidebarBox");
+    sideLayout->setObjectName("sidebarBox");
     mainLayout->addWidget( sideBox );
 
     QBoxLayout* sideLayout = new QVBoxLayout;
-    sideLayout.setObjectName("sidebarLayout");
+    sideLayout->setObjectName("sidebarLayout");
     sideBox->setLayout( sideLayout );
     // Set this attribute into qss file
     //sideBox->setFixedWidth( qBound( 100, CalamaresUtils::defaultFontHeight() * 12, w < windowPreferredWidth ? 100 : 190 ) );
     sideBox->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 
     QHBoxLayout* logoLayout = new QHBoxLayout;
-    logoLayout.setObjectName("logoLayout");
+    logoLayout->setObjectName("logoLayout");
     sideLayout->addLayout( logoLayout );
     logoLayout->addStretch();
     QLabel* logoLabel = new QLabel( sideBox );
