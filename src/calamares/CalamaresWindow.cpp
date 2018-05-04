@@ -34,6 +34,7 @@
 #include <QDesktopWidget>
 #include <QLabel>
 #include <QTreeView>
+#include <QFile>
 
 CalamaresWindow::CalamaresWindow( QWidget* parent )
     : QWidget( parent )
@@ -68,31 +69,37 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     resize( w, h );
 
     QBoxLayout* mainLayout = new QHBoxLayout;
+    sideLayout.setObjectName("mainLayout");
     setLayout( mainLayout );
 
     QWidget* sideBox = new QWidget( this );
+    sideLayout.setObjectName("sidebarBox");
     mainLayout->addWidget( sideBox );
 
     QBoxLayout* sideLayout = new QVBoxLayout;
+    sideLayout.setObjectName("sidebarLayout");
     sideBox->setLayout( sideLayout );
-    sideBox->setFixedWidth( qBound( 100, CalamaresUtils::defaultFontHeight() * 12, w < windowPreferredWidth ? 100 : 190 ) );
+    // Set this attribute into qss file
+    //sideBox->setFixedWidth( qBound( 100, CalamaresUtils::defaultFontHeight() * 12, w < windowPreferredWidth ? 100 : 190 ) );
     sideBox->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 
     QHBoxLayout* logoLayout = new QHBoxLayout;
+    logoLayout.setObjectName("logoLayout");
     sideLayout->addLayout( logoLayout );
     logoLayout->addStretch();
     QLabel* logoLabel = new QLabel( sideBox );
-    {
-        QPalette plt = sideBox->palette();
-        sideBox->setAutoFillBackground( true );
-        plt.setColor( sideBox->backgroundRole(), Calamares::Branding::instance()->
-                      styleString( Calamares::Branding::SidebarBackground ) );
-        plt.setColor( sideBox->foregroundRole(), Calamares::Branding::instance()->
-                      styleString( Calamares::Branding::SidebarText ) );
-        sideBox->setPalette( plt );
-        logoLabel->setPalette( plt );
-    }
-    logoLabel->setAlignment( Qt::AlignCenter );
+    // Define all values into qss file
+    // {
+    //     QPalette plt = sideBox->palette();
+    //     sideBox->setAutoFillBackground( true );
+    //     plt.setColor( sideBox->backgroundRole(), Calamares::Branding::instance()->
+    //                   styleString( Calamares::Branding::SidebarBackground ) );
+    //     plt.setColor( sideBox->foregroundRole(), Calamares::Branding::instance()->
+    //                   styleString( Calamares::Branding::SidebarText ) );
+    //     sideBox->setPalette( plt );
+    //     logoLabel->setPalette( plt );
+    // }
+    //logoLabel->setAlignment( Qt::AlignCenter );
     logoLabel->setFixedSize( 80, 80 );
     logoLabel->setPixmap( Calamares::Branding::instance()->
                           image( Calamares::Branding::ProductLogo,
@@ -142,6 +149,11 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     connect( m_viewManager, &Calamares::ViewManager::enlarge, this, &CalamaresWindow::enlarge );
 
     mainLayout->addWidget( m_viewManager->centralWidget() );
+    QFile File("/etc/calamares/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    this->setStyleSheet(StyleSheet);
+
 }
 
 void
