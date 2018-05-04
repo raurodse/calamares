@@ -69,11 +69,11 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     resize( w, h );
 
     QBoxLayout* mainLayout = new QHBoxLayout;
-    sideLayout->setObjectName("mainLayout");
+    mainLayout->setObjectName("mainLayout");
     setLayout( mainLayout );
 
     QWidget* sideBox = new QWidget( this );
-    sideLayout->setObjectName("sidebarBox");
+    sideBox->setObjectName("sidebarBox");
     mainLayout->addWidget( sideBox );
 
     QBoxLayout* sideLayout = new QVBoxLayout;
