@@ -53,13 +53,6 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
 
     QSize availableSize = qApp->desktop()->availableGeometry( this ).size();
     this->setObjectName("mainApp");
-
-
-    QFile File("/etc/calamares/stylesheet.qss");
-    File.open(QFile::ReadOnly);
-    QString StyleSheet = QLatin1String(File.readAll());
-    this->setStyleSheet(StyleSheet);
-
     
     cDebug() << "Available size" << availableSize;
 
@@ -93,6 +86,7 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     sideLayout->addLayout( logoLayout );
     logoLayout->addStretch();
     QLabel* logoLabel = new QLabel( sideBox );
+    logoLabel->setObjectName("logoApp");
     //Define all values into qss file
     {
         QPalette plt = sideBox->palette();
@@ -154,7 +148,10 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     connect( m_viewManager, &Calamares::ViewManager::enlarge, this, &CalamaresWindow::enlarge );
 
     mainLayout->addWidget( m_viewManager->centralWidget() );
-    
+    QFile File("/etc/calamares/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    this->setStyleSheet(StyleSheet);
 
 }
 
