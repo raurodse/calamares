@@ -34,6 +34,7 @@ BootInfoWidget::BootInfoWidget( QWidget* parent )
 {
     this->setObjectName("bootInfo");
     QHBoxLayout* mainLayout = new QHBoxLayout;
+    
     setLayout( mainLayout );
 
     CalamaresUtils::unmarginLayout( mainLayout );
@@ -50,9 +51,9 @@ BootInfoWidget::BootInfoWidget( QWidget* parent )
                                                           iconSize ) );
 
     QFontMetrics fm = QFontMetrics( QFont() );
-    m_bootLabel->setMinimumWidth( fm.boundingRect( "BIOS" ).width() + CalamaresUtils::defaultFontHeight() / 2 );
+    m_bootLabel->setMinimumWidth( fm.boundingRect( "BIOSUDESU" ).width() + CalamaresUtils::defaultFontHeight() / 2 );
     m_bootLabel->setAlignment( Qt::AlignCenter );
-
+    m_bootLabel->setObjectName("bootLabel");
     QPalette palette;
     palette.setBrush( QPalette::Foreground, QColor( "#4D4D4D" ) ); //dark grey
 
