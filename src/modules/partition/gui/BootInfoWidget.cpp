@@ -32,6 +32,7 @@ BootInfoWidget::BootInfoWidget( QWidget* parent )
     , m_bootIcon( new QLabel )
     , m_bootLabel( new QLabel )
 {
+    this->setObjectName("bootInfo");
     QHBoxLayout* mainLayout = new QHBoxLayout;
     setLayout( mainLayout );
 
