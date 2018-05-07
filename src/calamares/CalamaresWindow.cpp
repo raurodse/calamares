@@ -147,10 +147,10 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     connect( m_viewManager, &Calamares::ViewManager::enlarge, this, &CalamaresWindow::enlarge );
 
     mainLayout->addWidget( m_viewManager->centralWidget() );
-    QFile File("/etc/calamares/stylesheet.qss");
-    File.open(QFile::ReadOnly);
-    QString StyleSheet = QLatin1String(File.readAll());
-    this->setStyleSheet(StyleSheet);
+    // QFile File("/etc/calamares/stylesheet.qss");
+    // File.open(QFile::ReadOnly);
+    // QString StyleSheet = QLatin1String(File.readAll());
+    // this->setStyleSheet(StyleSheet);
 
 }
 
