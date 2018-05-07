@@ -86,7 +86,7 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     sideLayout->addLayout( logoLayout );
     logoLayout->addStretch();
     QLabel* logoLabel = new QLabel( sideBox );
-    Define all values into qss file
+    //Define all values into qss file
     {
         QPalette plt = sideBox->palette();
         sideBox->setAutoFillBackground( true );
