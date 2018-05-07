@@ -101,6 +101,7 @@ ProgressTreeDelegate::paintViewStep( QPainter* painter,
 
     if ( isCurrent )
     {
+        this->setObjecName("sidebarEntrySelectedApp");
         painter->setPen( Calamares::Branding::instance()->
                          styleString( Calamares::Branding::SidebarTextSelect ) );
         QString textHighlight = Calamares::Branding::instance()->
