@@ -28,13 +28,14 @@
 PrettyRadioButton::PrettyRadioButton( QWidget* parent )
     : QWidget( parent )
 {
-    this->setObjectName("partitionRadioOption");
     QHBoxLayout* mainLayout = new QHBoxLayout;
     setLayout( mainLayout );
 
     m_radio = new QRadioButton;
     m_label = new ClickableLabel;
 
+    m_radio->setObjetcName("radioPrettyButton");
+    m_label->setObjetcName("labelPrettyButton");
     connect( m_label, &ClickableLabel::clicked,
              m_radio, &QRadioButton::click );
     m_label->setBuddy( m_radio );
