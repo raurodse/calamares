@@ -28,6 +28,7 @@
 PrettyRadioButton::PrettyRadioButton( QWidget* parent )
     : QWidget( parent )
 {
+    this->setObjectName("partitionRadioOption");
     QHBoxLayout* mainLayout = new QHBoxLayout;
     setLayout( mainLayout );
 
