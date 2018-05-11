@@ -46,10 +46,10 @@ BootInfoWidget::BootInfoWidget( QWidget* parent )
 
     m_bootIcon->setMargin( 0 );
     m_bootIcon->setFixedSize( iconSize );
-    /*m_bootIcon->setPixmap( CalamaresUtils::defaultPixmap( CalamaresUtils::BootEnvironment,
+    m_bootIcon->setPixmap( CalamaresUtils::defaultPixmap( CalamaresUtils::BootEnvironment,
                                                           CalamaresUtils::Original,
                                                           iconSize ) );
-    */
+    
     QFontMetrics fm = QFontMetrics( QFont() );
     m_bootLabel->setMinimumWidth( fm.boundingRect( "BIOS" ).width() + CalamaresUtils::defaultFontHeight() / 2 );
     m_bootLabel->setAlignment( Qt::AlignCenter );
