@@ -30,13 +30,10 @@ PrettyRadioButton::PrettyRadioButton( QWidget* parent )
 {
     QHBoxLayout* mainLayout = new QHBoxLayout;
     setLayout( mainLayout );
-    this->setObjectName("optionPrettyButton");
 
     m_radio = new QRadioButton;
     m_label = new ClickableLabel;
 
-    m_radio->setObjectName("radioPrettyButton");
-    m_label->setObjectName("labelPrettyButton");
     connect( m_label, &ClickableLabel::clicked,
              m_radio, &QRadioButton::click );
     m_label->setBuddy( m_radio );
