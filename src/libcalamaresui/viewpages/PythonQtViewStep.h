@@ -51,13 +51,14 @@ public:
     void setConfigurationMap( const QVariantMap& configurationMap ) override;
 
     QWidget* createScriptingConsole();
+    PythonQtObjectPtr m_obj;
 
 protected:
     QWidget* m_widget;
 
 private:
     PythonQtObjectPtr m_cxt;
-    PythonQtObjectPtr m_obj;
+//    PythonQtObjectPtr m_obj;
 };
 
 }
