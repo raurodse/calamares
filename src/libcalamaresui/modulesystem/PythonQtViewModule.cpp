@@ -96,7 +96,7 @@ PythonQtViewModule::loadSelf()
             cala.addObject( "utils", s_utils );
 
             // Append configuration object
-            cala.addObject("configuration",m_configurationMap);
+            cala.addVariable("configuration",m_configurationMap);
 
             // Basic stdout/stderr handling
             QObject::connect( PythonQt::self(), &PythonQt::pythonStdOut,
