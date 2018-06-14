@@ -7,7 +7,7 @@ Subject: replace pkexec by sudo
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/calamares.desktop b/calamares.desktop
-index 6fefa32..c5b3750 100644
+index f8be5d1..53c2424 100644
 --- a/calamares.desktop
 +++ b/calamares.desktop
 @@ -5,7 +5,7 @@ Name=Install System
