@@ -86,13 +86,13 @@ set( _tx_complete da pt_PT ro tr_TR zh_TW zh_CN pt_BR fr hr ca lt id cs_CZ )
 set( _tx_good sq es pl ja sk it_IT hu ru he de nl bg uk )
 set( _tx_ok ast is ar sv el es_MX gl en_GB th fi_FI hi eu sr nb
             sl sr@latin mr es_PR kk kn et be )
-set( _tx_bad uz lo ur gu fr_CH fa eo )
+set( _tx_bad uz lo ur gu fr_CH fa eo ko )
 
 
 ### Required versions
 #
 # See DEPENDENCIES section below.
-set( QT_VERSION 5.6.0 )
+set( QT_VERSION 5.7.0 )
 set( YAMLCPP_VERSION 0.5.1 )
 set( ECM_VERSION 5.18 )
 set( PYTHONLIBS_VERSION 3.3 )

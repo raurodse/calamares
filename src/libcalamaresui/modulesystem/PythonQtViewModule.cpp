@@ -95,8 +95,8 @@ PythonQtViewModule::loadSelf()
                 s_utils = new ::Utils( Calamares::JobQueue::instance()->globalStorage() );
             cala.addObject( "utils", s_utils );
 
-            // Append configuration object
-            cala.addVariable("configuration",m_configurationMap);
+            // Append configuration object, in module PythonQt.calamares
+            cala.addVariable("configuration", m_configurationMap);
 
             // Basic stdout/stderr handling
             QObject::connect( PythonQt::self(), &PythonQt::pythonStdOut,
