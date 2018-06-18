@@ -1,3 +1,9 @@
+calamares (3.2.0+lliurex1) bionic; urgency=medium
+
+  * Added support to pythonqt
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Mon, 18 Jun 2018 14:54:32 +0200
+
 calamares (3.1.12-1) unstable; urgency=medium
 
   * New upstream release
