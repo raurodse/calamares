@@ -159,7 +159,6 @@ PythonQtViewStep::isAtEnd() const
 }
 
 
-
 void
 PythonQtViewStep::onLeave()
 {

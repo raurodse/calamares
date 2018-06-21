@@ -39,6 +39,7 @@ public:
 
     void next() override;
     void back() override;
+    void onLeave() override;
 
     bool isNextEnabled() const override;
     bool isBackEnabled() const override;
