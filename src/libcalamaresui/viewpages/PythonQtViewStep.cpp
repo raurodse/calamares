@@ -161,7 +161,7 @@ PythonQtViewStep::isAtEnd() const
 
 
 void
-PythonQtViewStep::onLeave() const
+PythonQtViewStep::onLeave()
 {
     CalamaresUtils::lookupAndCall( m_obj,
                                           { "onLeave",
