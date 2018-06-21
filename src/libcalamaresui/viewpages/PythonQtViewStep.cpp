@@ -159,6 +159,17 @@ PythonQtViewStep::isAtEnd() const
 }
 
 
+
+void
+PythonQtViewStep::onLeave() const
+{
+    CalamaresUtils::lookupAndCall( m_obj,
+                                          { "onLeave",
+                                            "onleave",
+                                            "on_leave" } );
+}
+
+
 JobList
 PythonQtViewStep::jobs() const
 {
