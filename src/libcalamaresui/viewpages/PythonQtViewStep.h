@@ -40,6 +40,7 @@ public:
     void next() override;
     void back() override;
     void onLeave() override;
+    void onActivate() override;
 
     bool isNextEnabled() const override;
     bool isBackEnabled() const override;
@@ -52,14 +53,13 @@ public:
     void setConfigurationMap( const QVariantMap& configurationMap ) override;
 
     QWidget* createScriptingConsole();
-    PythonQtObjectPtr m_obj;
 
 protected:
     QWidget* m_widget;
 
 private:
     PythonQtObjectPtr m_cxt;
-//    PythonQtObjectPtr m_obj;
+    PythonQtObjectPtr m_obj;
 };
 
 }
